@@ -34,7 +34,7 @@ import org.springframework.stereotype.Controller;
 //Spring3設定
 //Actionクラスのスコープ設定
 @Scope("prototype")
-public class LoginAction extends BaseAction{
+public class LoginAction extends BaseAction {
 	@Action("login")
 	@SkipValidation
 	public String execute() throws Exception {

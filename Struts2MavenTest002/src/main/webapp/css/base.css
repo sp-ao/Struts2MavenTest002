@@ -1,0 +1,191 @@
+@CHARSET "UTF-8";
+/* 基本設定 */
+html {
+
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+h2 {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
+td, th {
+	text-align: center;
+}
+dd {
+	padding-left: 15px;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	/* text-decoration: none; */
+}
+
+/* 個別設定 */
+div.container{
+	/* max-width: 900px; */
+}
+p.err{
+	color:red;
+}
+div.result dd{
+	margin-bottom:32px;
+}
+.page-sub-header {
+	float: right;
+}
+.left-menu-logout {
+	margin-top: 2px;
+	font-weight: bold;
+}
+.left-menu-logout a,
+.left-menu-main a {
+	padding-left: 20px;
+}
+.list-group-item ul {
+	cursor: default;
+
+}
+.list-group-item ul li {
+	margin-bottom: 10px;
+}
+.left-menu-main {
+	font-weight: bold;
+}
+.list-group {
+	margin-top: 4px;
+}
+.page-cap {
+	height: 40px;
+	margin-left: 0;
+	padding-left: 0;
+}
+.page-cap h2 {
+	margin: 0;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.list-contents-dummy {
+	display: none;
+}
+.btn-box {
+	margin-left: 0;
+	padding-left: 0;
+}
+.btn-m-box {
+	margin-left: 0;
+	padding-left: 15px;
+	margin-top: 20px;
+}
+.btn-s-box {
+	float: left;
+	margin-right: 30px;
+	margin-left: 0;
+	padding-left: 0;
+	margin-bottom: 20px;
+}
+.form-box {
+	margin-bottom: 15px;
+}
+
+/* ﾛｸﾞｲﾝ画面固有設定 */
+.login-row {
+	margin-top: 30px;
+}
+/* ﾕｰｻﾞｰﾘｽﾄ画面固有設定 */
+.userlist-main {
+	margin-top: 15px;
+}
+.userlist-input {
+	font-size: 12px;
+}
+.userlist-select {
+	font-size: 10.5px;
+}
+.form-box-table-userlist {
+/* 	height: 300px; */
+/* 	overflow-y:auto; */
+}
+
+/* ﾌｧｲﾙｱｯﾌﾟﾛｰﾄﾞ固有設定 */
+.fileupload-form {
+	padding-top: 50px;
+}
+.fileupload-msg-box {
+	padding-top: 50px;
+}
+.fileupload-submit {
+	margin-top: 15px;
+}
+
+/* 商品ﾘｽﾄ固有設定 */
+.itemlist-main {
+	margin-top: 15px;
+}
+.itemlist-form-box {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.itemlist-button-box {
+	margin-bottom: 30px;
+}
+.itemlist-selall {
+	margin-top: 10px;
+	padding-left: 16px;
+}
+.itemlist-selall label {
+	font-size: 16px;
+	height: 15px;
+}
+
+/* テーブルスクロール関連設定 */
+/* .header-fixed { */
+/*     width: 100%; */
+/* } */
+/* .header-fixed > thead, */
+/* .header-fixed > tbody, */
+/* .header-fixed > thead > tr, */
+/* .header-fixed > tbody > tr, */
+/* .header-fixed > thead > tr > th, */
+/* .header-fixed > tbody > tr > td { */
+/*     display: block; */
+/* } */
+/* .header-fixed > tbody > tr:after, */
+/* .header-fixed > thead > tr:after { */
+/*     content: ' '; */
+/*     display: block; */
+/*     visibility: hidden; */
+/*     clear: both; */
+/* } */
+/* .header-fixed > tbody { */
+/*     overflow-y: auto; */
+/*     height: 300px; */
+/* } */
+/* .header-fixed > tbody > tr > td, */
+/* .header-fixed > thead > tr > th { */
+/*     width: 16.5%; */
+/*     float: left; */
+/*     font-size: 13px; */
+/* } */
+/* .header-fixed > tbody > tr > td { */
+/*     text-align: center; */
+
+/* } */
+
+
+/* メッセージボックス */
+.alert-success {
+	color: #3c763d;
+}
+.alert-danger {
+	color: #a94442;
+}

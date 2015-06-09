@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="/">
+	<!-- 指定ユーザーリスト取得 LoginService -->
+	<select id="select_logininfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			userid,
+			password,
+			permission,
+			delflg
+		FROM
+			struts2maventest002.user
+		WHERE
+			userid = #{userId}
+		AND
+			password = #{password}
+		AND
+			delflg = '0'
+	</select>
+	<!-- ユーザーID取得 UserListService -->
+	<select id="select_user" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			userid
+		FROM
+			struts2maventest002.user
+		WHERE
+			userid = #{userId}
+	</select>
+	<!-- 全ユーザーリスト取得 UserListService -->
+	<select id="select_userlist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			userid,
+			username,
+			password,
+			permission,
+			delflg,
+			lastupdate
+		FROM
+			struts2maventest002.user
+	</select>
+	<!-- ユーザリスト作成 UserListService -->
+	<insert id="insert_userlist"  parameterType="java.util.HashMap">
+		INSERT INTO struts2maventest002.user (
+			userid,
+			username,
+			password,
+			permission,
+			delflg,
+			lastupdate
+		) VALUES (
+			#{userId},
+			#{userName},
+			#{password},
+			#{permission},
+			#{delFlg},
+			cast(now() as datetime)
+		)
+	</insert>
+	<!-- ユーザリスト更新 UserListService -->
+	<update id="update_userlist" parameterType="java.util.HashMap">
+		UPDATE
+			struts2maventest002.user
+		SET
+			username   = #{userName},
+			password   = #{password},
+			permission = #{permission},
+			delflg     = #{delFlg},
+			lastupdate = cast(now() as datetime)
+		WHERE
+			userid = #{userId}
+	</update>
+	<!-- ユーザリスト削除 UserListService -->
+	<update id="delete_userlist" parameterType="java.util.HashMap">
+		UPDATE
+			struts2maventest002.user
+		SET
+			delflg = '1',
+			lastupdate = cast(now() as datetime)
+		WHERE
+			userid = #{userId}
+		AND
+			delflg = '0'
+	</update>
+
+	<!-- 商品リスト取得 ItemListService -->
+	<select id="select_itemlist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			itemcd,
+			itemname,
+			itemkbn,
+			delflg,
+			lastupdate
+		FROM
+			struts2maventest002.item
+	</select>
+
+	<!-- 商品リストカウント取得 ItemListService -->
+	<select id="select_itemlist_count" parameterType="java.util.HashMap" resultType="Integer">
+		SELECT
+			count(itemcd)
+		FROM
+			struts2maventest002.item
+		WHERE
+			itemcd = #{itemCd}
+	</select>
+
+	<!-- 商品リスト作成 ItemListService -->
+	<insert id="insert_itemlist" parameterType="java.util.List">
+		INSERT INTO struts2maventest002.item (
+			itemcd,
+			itemname,
+			itemkbn,
+			delflg,
+			lastupdate
+		) VALUES (
+		<foreach item="item" collection="list" separator="),(">
+			#{item.itemCd},
+			#{item.itemName},
+			#{item.itemKbn},
+			#{item.delFlg},
+			cast(now() as datetime)
+		</foreach>
+		)
+	</insert>
+	<!-- 商品リスト更新 ItemListService -->
+	<!-- 複数UPDATE対応のためON DUPLICATEを使用 -->
+	<update id="update_itemlist" parameterType="java.util.List">
+		INSERT INTO struts2maventest002.item (
+			itemcd,
+			itemname,
+			itemkbn,
+			delflg,
+			lastupdate
+		)
+		VALUES
+		<foreach item="item" collection="list" open="(" separator="),(" close=")">
+			<if test="item.targetRow != 'false'">
+			#{item.itemCd},
+			#{item.itemName},
+			#{item.itemKbn},
+			#{item.delFlg},
+			cast(now() as datetime)
+			</if>
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+			itemname = VALUES(itemName),
+			itemKbn = VALUES(itemKbn),
+			delflg = VALUES(delflg),
+			lastupdate = VALUES(lastupdate)
+	</update>
+
+	<!-- ダウンロードテーブル情報取得 FileDownloadService -->
+	<select id="select_downloadTable" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			<if test="colmun != null">
+			${colmun}
+			</if>
+			<if test="colmun == null">
+			*
+			</if>
+		FROM
+			struts2maventest002.${tableName}
+	</select>
+
+		<!-- テーブル名一覧取得 CommonService -->
+	<select id="select_TableList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SHOW
+			TABLE STATUS
+		FROM
+			struts2maventest002;
+	</select>
+</mapper>

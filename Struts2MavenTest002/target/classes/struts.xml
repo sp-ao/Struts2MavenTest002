@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  アクションクラス!メソッド.action禁止 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<!--  開発者モード -->
+	<constant name="struts.devMode" value="true"/>
+	<!--  spring3 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!--  テーマ -->
+	<constant name="struts.ui.templateSuffix" value="java" />
+	<constant name="struts.ui.theme" value="simple" />
+	<!--  プロパティファイル -->
+	<constant name="struts.custom.i18n.resources" value="message,global" />
+	<!--  一時ファイル -->
+<!-- 	<constant name="struts.multipart.saveDir" value="D:\pleiades\workspace\Struts2MavenTest002\files" /> -->
+	<constant name="struts.multipart.saveDir" value="/var/www/html/files/tmp/" />
+	<!--  定数 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<!--  パッケージ -->
+	<package name="default" namespace="/" extends="struts-default">
+		<!--  インターセプター -->
+		<interceptors>
+			<interceptor name="session" class="struts2maven.Struts2MavenTest002.interceptor.SessionInterceptor" />
+			<interceptor name="redirectMessage" class="struts2maven.Struts2MavenTest002.interceptor.RedirectMessageInterceptor" />
+			<interceptor name="delete" class="struts2maven.Struts2MavenTest002.interceptor.DeleteInterceptor" />
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="store">
+					<param name="operationMode">STORE</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="session"/>
+				<interceptor-ref name="redirectMessage"/>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="login-success" type="redirect">menu</result>
+			<result name="fileDownload-success" type="redirect">fileDownload</result>
+		</global-results>
+	</package>
+</struts>

@@ -1,0 +1,22 @@
+TABLE_CATALOG,TABLE_SCHEMA,TABLE_NAME,PROPERTIE_NAME,PROPERTIE_VALUE
+localhost/struts2maventest002,struts2maventest002,user,TABLE_CATALOG,
+localhost/struts2maventest002,struts2maventest002,user,TABLE_SCHEMA,struts2maventest002
+localhost/struts2maventest002,struts2maventest002,user,TABLE_NAME,user
+localhost/struts2maventest002,struts2maventest002,user,TABLE_TYPE,BASE TABLE
+localhost/struts2maventest002,struts2maventest002,user,ENGINE,InnoDB
+localhost/struts2maventest002,struts2maventest002,user,VERSION,10
+localhost/struts2maventest002,struts2maventest002,user,ROW_FORMAT,Compact
+localhost/struts2maventest002,struts2maventest002,user,TABLE_ROWS,3
+localhost/struts2maventest002,struts2maventest002,user,AVG_ROW_LENGTH,5461
+localhost/struts2maventest002,struts2maventest002,user,DATA_LENGTH,16384
+localhost/struts2maventest002,struts2maventest002,user,MAX_DATA_LENGTH,0
+localhost/struts2maventest002,struts2maventest002,user,INDEX_LENGTH,0
+localhost/struts2maventest002,struts2maventest002,user,DATA_FREE,4194304
+localhost/struts2maventest002,struts2maventest002,user,AUTO_INCREMENT,
+localhost/struts2maventest002,struts2maventest002,user,CREATE_TIME,2015/05/23 23:02:03
+localhost/struts2maventest002,struts2maventest002,user,UPDATE_TIME,
+localhost/struts2maventest002,struts2maventest002,user,CHECK_TIME,
+localhost/struts2maventest002,struts2maventest002,user,TABLE_COLLATION,utf8_general_ci
+localhost/struts2maventest002,struts2maventest002,user,CHECKSUM,
+localhost/struts2maventest002,struts2maventest002,user,CREATE_OPTIONS,
+localhost/struts2maventest002,struts2maventest002,user,TABLE_COMMENT,

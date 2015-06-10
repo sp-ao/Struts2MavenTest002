@@ -38,30 +38,3 @@ function checkBoxAll(obj) {
 		alert(e);
 	}
 }
-/**
- *  処理中マスク
- */
-function displayMask() {
-	try {
-		// マスクの対象Class設定
-		// メッセージとdelay （マスク表示までの遅延時間ミリ秒）を指定
-		$('.main-contents').mask('処理中...', 1000);
-	} catch(e){
-		alert(e);
-	}
-}
-/**
- *  二重送信・多重送信禁止
- */
-function submitDisable(element){
-//	try{
-//		$('<input />').attr('type', 'hidden')
-//			.attr('name', $(element).attr('name'))
-//			.attr('value', $(element).val())
-//			.appendTo('.multiBtnForm');
-//		$(element).text('please wait...');
-//		$(element).attr('disabled', true);
-//	} catch(e) {
-//	  alert(e );
-//	}
-}

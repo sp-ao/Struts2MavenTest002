@@ -166,14 +166,14 @@
 								</div>
 								<!--  作成 -->
 								<div class="col-sm-9">
-									<s:form action="ItemListUpload" method="post" enctype="multipart/form-data">
+									<s:form action="insert_item" method="post" enctype="multipart/form-data">
 										<label class="control-label">商品ﾘｽﾄ新規作成：ﾕｰｻﾞｰﾘｽﾄCSVﾌｧｲﾙを選択してください</label>
 										<s:file
 											name="fileUploadBean.document"
 											cssClass="file"
 											label="File"
 											accept="text/comma-separated-values"
-											onchange="isCsv(document.getElementById('ItemListUpload_fileUploadBean_document').value); return false;"/>
+										/>
 									</s:form>
 								</div>
 							</div>

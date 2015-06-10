@@ -54,7 +54,7 @@ function userListDelete(element){
 		// ﾕｰｻﾞｰID
 		var userId = tdval[1].textContent;
 
-		if (window.confirm("ﾕｰｻﾞｰID：" + arr[1] + "このﾕｰｻﾞｰを削除してもよろしいですか？")) {
+		if (window.confirm("ﾕｰｻﾞｰID：" + arr[1] + "\nこのﾕｰｻﾞｰを削除してもよろしいですか？")) {
 			var ele = document.createElement("input");
 			// 渡した値にスペースとカンマが入ってしまう（課題）
 		    ele.setAttribute("type", "hidden");

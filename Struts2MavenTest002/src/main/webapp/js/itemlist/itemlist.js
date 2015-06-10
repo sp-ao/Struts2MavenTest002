@@ -19,6 +19,13 @@ $(document).ready(function(){
 	}
 });
 
+// アップロード
+$(document).on('click', '.fileinput-upload-button', function () {
+	  // クリックした時の処理
+	$('.itemlist-main').mask('処理中...', 1000);
+	return true;
+});
+
 //更新ボタン押下
 function itemListUpdate(){
 	try {
@@ -28,6 +35,7 @@ function itemListUpdate(){
 		});
 		// 一つ以上チェックされていた場合
 		if (chkVal.length > 0) {
+			document.itemListForm[0].remove();
 			document.itemListForm.action = "item_confim.action";
 			document.itemListForm.submit();
 		} else {

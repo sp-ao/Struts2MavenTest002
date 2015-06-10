@@ -5,19 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.swing.text.html.FormSubmitEvent;
 
-import org.apache.struts2.components.ActionError;
 import org.apache.struts2.convention.annotation.*;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import struts2maven.Struts2MavenTest002.model.ItemList;
 import struts2maven.Struts2MavenTest002.model.UserList;
 import struts2maven.Struts2MavenTest002.service.Common;
 import struts2maven.Struts2MavenTest002.service.UserListService;
-import sun.tools.tree.ThisExpression;
 
 import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 /**
@@ -136,7 +132,7 @@ public class UserListAction extends BaseAction {
 					ret = service.insertUserList(
 							(List<Object>) session.get("INPUT_LIST"));
 					// 戻り値判定
-					if (ret == "insert") {
+					if (ret.equals("insert")) {
 						// メッセージ設定
 						addActionMessage(getText("userList.insert.success"));
 						// 戻り値
@@ -173,7 +169,7 @@ public class UserListAction extends BaseAction {
 					ret = service.updateUserList(
 							(List<Object>) session.get("INPUT_LIST"));
 					// 戻り値判定
-					if (ret == "update") {
+					if (ret.equals("update")) {
 						// メッセージ設定
 						addActionMessage(getText("userList.update.success"));
 						// 戻り値
@@ -201,15 +197,20 @@ public class UserListAction extends BaseAction {
 		// メッセージ初期化
 		clearBef();
 		// 画面値判定
-		if (session != null) {
+		if (userListBean != null) {
+			// 削除対象取得
+			List<String> delUser = new ArrayList<String>();
+			List<Object> object = new ArrayList<Object>();
+			// カンマと半角スペース削除（★Pending 暫定処理）
+			delUser.add(userListBean.getEditUserId().replaceAll(",", "").replace(" ", ""));
+			object.add(delUser);
 			// ユーザー取得
-			userList = service.selectUser(
-					(List<Object>) session.get("INPUT_LIST"));
+			userList = service.selectUser(object);
 			// ユーザー存在する
 			if (userList.size() > 0) {
 				// ユーザー削除サービス
 				ret = service.deleteUserList(userListBean);
-				if (ret == "delete") {
+				if (ret.equals("delete")) {
 					// メッセージ設定
 					addActionMessage(getText("userList.delete.success"));
 					// 戻り値

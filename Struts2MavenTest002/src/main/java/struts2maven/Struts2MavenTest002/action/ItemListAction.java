@@ -2,6 +2,7 @@ package struts2maven.Struts2MavenTest002.action;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -131,7 +132,7 @@ public class ItemListAction extends BaseAction {
 	}
 
 	// 商品リスト作成
-	@Action("ItemListUpload")
+	@Action("insert_item")
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String ItemListUpload() throws Exception {
@@ -169,7 +170,7 @@ public class ItemListAction extends BaseAction {
 					// 商品リスト作成サービス
 					ret = service.insertItemList(resultMap);
 					// 戻り値判定
-					if (ret == "insert") {
+					if (ret.equals("insert")) {
 						// メッセージ設定
 						addActionMessage(getText("itemList.insert.success", new String[]{insertCount}));
 						return ret;
@@ -194,7 +195,7 @@ public class ItemListAction extends BaseAction {
 				// 商品リスト更新
 				ret = service.updateItemList(
 						(List<Object>)session.get("INPUT_LIST"));
-				if (ret == "update") {
+				if (ret.equals("update")) {
 					// メッセージ設定
 					addActionMessage(getText("itemList.update.success"));
 					return ret;
@@ -226,6 +227,8 @@ public class ItemListAction extends BaseAction {
 		String outDelFlg = "";
 		// 更新データがNULLでない
 		if (itemList != null){
+			// null項目削除
+			itemList.removeAll(Collections.singleton(null));
 			// 更新データ
 			for (int i = 0; i<itemList.size(); i++) {
 				if (itemList.get(i).getTargetRow().equals("true")) {

@@ -42,7 +42,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">ﾊﾟｽﾜｰﾄﾞ:</label>
 						<div class="col-sm-4">
-							<s:textfield name="loginBean.password" type="password" cssClass="form-control"/>
+							<s:password name="loginBean.password" cssClass="form-control"></s:password>
 						</div>
 						<div class="col-sm-4"></div>
 					</div>

@@ -1,28 +1,9 @@
 package struts2maven.Struts2MavenTest002.action;
 
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
 import org.apache.struts2.convention.annotation.*;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.supercsv.io.CsvBeanReader;
-import org.supercsv.io.ICsvBeanReader;
-import org.supercsv.prefs.CsvPreference;
-
-import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
-
-import struts2maven.Struts2MavenTest002.model.FileUpload;
-import struts2maven.Struts2MavenTest002.model.ItemList;
-import struts2maven.Struts2MavenTest002.service.Common;
-import struts2maven.Struts2MavenTest002.service.ItemListService;
 
 /**
  * 商品リスト

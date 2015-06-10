@@ -1,12 +1,10 @@
 package struts2maven.Struts2MavenTest002.action;
 
 import org.apache.struts2.convention.annotation.*;
-import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import struts2maven.Struts2MavenTest002.model.Login;
-import struts2maven.Struts2MavenTest002.service.Common;
 
 import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 

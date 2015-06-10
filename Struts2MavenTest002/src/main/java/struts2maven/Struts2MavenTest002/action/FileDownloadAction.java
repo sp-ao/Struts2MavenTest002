@@ -159,10 +159,11 @@ public class FileDownloadAction extends BaseAction {
 		StringBuilder bufPathFile = new StringBuilder();
 		// 削除対象ファイルパス格納
 		ArrayList<String> delFile = new ArrayList<String>();
+		String under = "_";
 
 		bufPathFile.append(pathTemp);
 		bufPathFile.append(session.get("userid"));
-		bufPathFile.append("_");
+		bufPathFile.append(under);
 		bufPathFile.append(tableName);
 		bufPathFile.append(fileExtension);
 		//String pathTempFile = pathTemp + session.get("userid") + tableName + fileExtension;

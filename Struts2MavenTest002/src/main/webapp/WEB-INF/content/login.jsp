@@ -35,21 +35,34 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">ﾕｰｻﾞｰID:</label>
 						<div class="col-sm-4">
-							<s:textfield name="loginBean.userId" cssClass="form-control"></s:textfield>
+							<s:textfield
+								name="loginBean.userId"
+								cssClass="form-control"
+								tabindex="1">
+							</s:textfield>
 						</div>
 						<div class="col-sm-4"></div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-4 control-label">ﾊﾟｽﾜｰﾄﾞ:</label>
 						<div class="col-sm-4">
-							<s:password name="loginBean.password" cssClass="form-control"></s:password>
+							<s:password
+								name="loginBean.password"
+								cssClass="form-control"
+								tabindex="2">
+							</s:password>
 						</div>
 						<div class="col-sm-4"></div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-8">
-							<s:submit value="LOGIN" cssClass="btn btn-primary" id="btn-login"></s:submit>
+							<s:submit
+								value="LOGIN"
+								cssClass="btn btn-primary"
+								id="btn-login"
+								tabindex="3">
+							</s:submit>
 						</div>
 					</div>
 					<div class="form-group">

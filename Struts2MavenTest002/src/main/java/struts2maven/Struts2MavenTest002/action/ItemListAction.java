@@ -38,10 +38,12 @@ import struts2maven.Struts2MavenTest002.service.ItemListService;
 	@Result(name = "input", location = "itemList", type = "redirect"),
 	@Result(name = "none", location = "login", type = "redirect"),
 	@Result(name = "confirm", location = "confirm", type = "chain"),
+	@Result(name = "list", type="json", params={"root", "itemListJson", "excludeNullProperties", "true"}),
 	@Result(name = "success", location = "itemList.jsp"),
 	@Result(name = "insert", location = "itemList", type = "redirect"),
 	@Result(name = "update", location = "itemList", type = "redirect")
 })
+
 // 例外処理定義
 @ExceptionMappings({
 	@ExceptionMapping(exception="java.lang.Exception" , result="exception")
@@ -74,7 +76,7 @@ public class ItemListAction extends BaseAction {
 	public void setItemList(List<ItemList> itemList) {
 		this.itemList = itemList;
 	}
-	// Bean
+	// ファイルアップロード用Bean
 	private FileUpload fileUploadBean;
 	public FileUpload getFileUploadBean() {
 		return fileUploadBean;
@@ -82,7 +84,8 @@ public class ItemListAction extends BaseAction {
 	public void setFileUploadBean(FileUpload fileUploadBean) {
 		this.fileUploadBean = fileUploadBean;
 	}
-	// Bean
+
+	// データ取得用Bean
 	private ItemList itemListBean;
 	public ItemList getItemListBean() {
 		return itemListBean;
@@ -91,6 +94,15 @@ public class ItemListAction extends BaseAction {
 		// メッセージクリア
 		Common.clearBefMessage();
 		this.itemListBean = itemListBean;
+	}
+
+	// データ出力用Bean
+	Map<String, Object> itemListJson = new HashMap<String, Object>();
+	public Map<String, Object> getItemListJson() {
+		return itemListJson;
+	}
+	public void setItemListJson(Map<String, Object> itemListJson) {
+		this.itemListJson = itemListJson;
 	}
 
 	// Service
@@ -126,9 +138,43 @@ public class ItemListAction extends BaseAction {
 			setActionErrors(messagesList);
 		}
 		// セッションに商品リストを設定
-		session.put("ItemList", itemList);
+		session.put("ITEMLIST", itemList);
 		// 戻り値
 		return SUCCESS;
+	}
+
+	// 商品リスト出力
+	@Action("getItemJson")
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String getItemJson() throws Exception {
+
+		// データカウント用
+		String itemListCnt = "";
+
+		// セッション判定
+		if (session != null) {
+			// セッションから取得
+			itemList = (List<ItemList>) session.get("ITEMLIST");
+		} else {
+			// 商品リストデータ取得サービス
+			itemList = service.selectItemList();
+		}
+
+		// 取得出来なかった場合
+		if (itemList.size() < 1) {
+			// メッセージ設定
+			messagesList.add(getText("itemList.select.failure"));
+			setActionErrors(messagesList);
+		}
+		// 表示データ設定
+		itemListCnt = String.valueOf(itemList.size() -1);
+		itemListJson.put("draw","1");
+		itemListJson.put("recordsTotal", itemListCnt);
+		itemListJson.put("recordsFiltered",itemListCnt);
+		itemListJson.put("data", itemList);
+		// 戻り値
+		return "list";
 	}
 
 	// 商品リスト作成
@@ -208,6 +254,7 @@ public class ItemListAction extends BaseAction {
 		// 戻り値
 		return ret;
 	}
+
 	// 商品リスト更新確認
 	@Action("item_confim")
 	public String ItemConfrm() throws Exception {
@@ -231,7 +278,7 @@ public class ItemListAction extends BaseAction {
 			itemList.removeAll(Collections.singleton(null));
 			// 更新データ
 			for (int i = 0; i<itemList.size(); i++) {
-				if (itemList.get(i).getTargetRow().equals("true")) {
+				if (itemList.get(i).getTargetRow() != null) {
 					List<String> inpList = new ArrayList<String>();
 					List<String> outList = new ArrayList<String>();
 

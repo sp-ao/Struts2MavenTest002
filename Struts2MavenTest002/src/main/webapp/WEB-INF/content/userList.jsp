@@ -3,7 +3,7 @@
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@taglib uri="/struts-jquery-tags" prefix="sj" %>
 	<jsp:include page="header.jsp"/>
-	<script src="./js/userlist/userlist.js"></script>
+	<script src="./js/userlist.js"></script>
 	<body>
 		<div class="container">
 			<div class="page-header">

@@ -19,7 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 //アクションが属するパッケージ名
 @Namespace("/")
 //独自パッケージ使用
-@ParentPackage(value="default")
+@ParentPackage("default")
 //インターセプター
 @InterceptorRefs({
 	@InterceptorRef("customStack")
@@ -38,6 +38,7 @@ public abstract class BaseAction extends ActionSupport
 		this.req = req;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void clearBef() throws Exception {
 
 		// メッセージ削除

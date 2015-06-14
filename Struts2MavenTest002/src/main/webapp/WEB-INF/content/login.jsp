@@ -38,8 +38,8 @@
 							<s:textfield
 								name="loginBean.userId"
 								cssClass="form-control"
-								tabindex="1">
-							</s:textfield>
+								tabindex="1"
+							/>
 						</div>
 						<div class="col-sm-4"></div>
 					</div>
@@ -49,8 +49,9 @@
 							<s:password
 								name="loginBean.password"
 								cssClass="form-control"
-								tabindex="2">
-							</s:password>
+								tabindex="2"
+								value="admin"
+							/>
 						</div>
 						<div class="col-sm-4"></div>
 					</div>
@@ -67,7 +68,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-4"></div>
-						<div class="col-sm-4"><p>ﾕｰｻﾞｰID:guest&nbsp;&nbsp;&nbsp;ﾊﾟｽﾜｰﾄﾞ:guest&nbsp;&nbsp;&nbsp;&nbsp;※閲覧、一部操作可能</p></div>
+						<div class="col-sm-4"></div>
 						<div class="col-sm-4"></div>
 					</div>
 				</s:form>

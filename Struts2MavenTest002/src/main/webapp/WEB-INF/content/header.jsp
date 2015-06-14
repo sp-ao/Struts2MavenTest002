@@ -18,10 +18,10 @@
 		<script src="./js/jquery-accordion.js"></script>
 		<script src="./js/jquery.dataTables.js"></script>
 		<script src="./js/jquery.dataTables.Conf.js"></script>
-		<script src="./js/jquery-scrollbar.js"></script>
 		<script src="./js/jquery.mask.min.js"></script>
 		<script src="./js/jquery.disableOnSubmit.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/fileinput.min.js"></script>
+		<script src="./js/permission.js"></script>
 		<script src="./js/base.js"></script>
 	</head>

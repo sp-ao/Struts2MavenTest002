@@ -5,8 +5,10 @@ $(document).ready(function(){
 	try {
 		// フォーム存在判定
 		if (!!document.forms[0]) {
-			// フォーカス設定
-			document.forms[0].elements[0].focus();
+			if (!!document.forms[0].elements[0]) {
+				// フォーカス設定
+				document.forms[0].elements[0].focus();
+			}
 		}
 
 		// エラーブロックに要素が存在する場合

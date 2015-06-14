@@ -88,7 +88,7 @@ function itemListUpdate(){
 		});
 		// 一つ以上チェックされていた場合
 		if (chkVal.length > 0) {
-			document.itemListForm[0].remove();
+			//document.itemListForm[0].remove();
 			document.itemListForm.action = "item_confim.action";
 			document.itemListForm.submit();
 		} else {

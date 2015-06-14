@@ -36,6 +36,15 @@
 											<th>対象</th>
 										</tr>
 									</thead>
+									<tfoot>
+										<tr>
+											<th>商品ｺｰﾄﾞ</th>
+											<th>商品名</th>
+											<th>商品区分</th>
+											<th>状態</th>
+											<th>対象</th>
+										</tr>
+									</tfoot>
 									<tbody>
 									</tbody>
 								</table>

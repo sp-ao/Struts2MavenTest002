@@ -9,6 +9,8 @@
 	<constant name="struts.devMode" value="true"/>
 	<!--  spring3 -->
 	<constant name="struts.objectFactory" value="spring" />
+	<!--  json -->
+	<constant name="struts.convention.default.parent.package" value="json-default"/>
 	<!--  テーマ -->
 	<constant name="struts.ui.templateSuffix" value="java" />
 	<constant name="struts.ui.theme" value="simple" />
@@ -21,7 +23,7 @@
 	<constant name="struts.configuration.xml.reload" value="true" />
 	<constant name="struts.devMode" value="true" />
 	<!--  パッケージ -->
-	<package name="default" namespace="/" extends="struts-default">
+	<package name="default" namespace="/" extends="json-default">
 		<!--  インターセプター -->
 		<interceptors>
 			<interceptor name="session" class="struts2maven.Struts2MavenTest002.interceptor.SessionInterceptor" />

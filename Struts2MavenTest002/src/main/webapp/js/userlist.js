@@ -59,15 +59,14 @@ function userListDelete(element){
 	var tdval = $("#userListTable tbody tr").eq(row).children();
 	var arr = new Array(row);
 	try{
-		// 二重送信禁止
-		submitDisable(element);
-
+		// クリックした行を配列へ格納
 		$(tdval).each(function(i, elem) {
 			arr[i] = $(elem).text();
 		});
 		// ﾕｰｻﾞｰID
 		var userId = tdval[1].textContent;
 
+		// 確認画面
 		if (window.confirm("ﾕｰｻﾞｰID：" + arr[1] + "\nこのﾕｰｻﾞｰを削除してもよろしいですか？")) {
 			var ele = document.createElement("input");
 			// 渡した値にスペースとカンマが入ってしまう（課題）

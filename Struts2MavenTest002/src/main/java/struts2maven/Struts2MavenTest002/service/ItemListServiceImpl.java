@@ -25,10 +25,8 @@ import struts2maven.Struts2MavenTest002.model.ItemList;
  *
  */
 @Service
-public class ItemListServiceImpl extends BaseServiceImpl
-							  	 implements ItemListService {
+public class ItemListServiceImpl extends BaseServiceImpl implements ItemListService {
 
-	private static Logger log = LoggerFactory.getLogger(ItemListServiceImpl.class);
 	private String reg = "^[a-zA-Z0-9]+$";
 	private String charSet = "UTF-8";
 
@@ -133,10 +131,7 @@ public class ItemListServiceImpl extends BaseServiceImpl
 		String workKeyStr = "";
 
 		try {
-			// 拡張子チェック
-
-			// ファイルサイズチェック
-
+			// リスト分ループ
 			while ((itemListBean = inFile.read(ItemList.class, ItemList.HEADER)) != null) {
 				// 行数文字列設定
 				rowStr = rowCount.toString() + "行目：";

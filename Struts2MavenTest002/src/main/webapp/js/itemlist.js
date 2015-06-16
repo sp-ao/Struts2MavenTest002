@@ -19,7 +19,7 @@ $(document).ready(function(){
 					"orderDataType": "dom-text",
 					"type" : 'string',
 					"render": function ( data, type, full, meta ) {
-						return '<input type="text" name="itemList[' + meta.row + '].itemCd" id="itemList[' + meta.row + '].itemCd" value="' + data + '" class="form-control input-sm input-itemcd"  maxlength="10" readonly="true" />';
+						return '<input type="text" name="itemList[' + meta.row + '].itemCd" id="itemList[' + meta.row + '].itemCd" maxlength="10" value="' + data + '" class="form-control input-sm input-itemcd" readonly="true" />';
 
 					}
 				},
@@ -28,14 +28,14 @@ $(document).ready(function(){
 					"orderDataType": "dom-text",
 					"type" : 'string',
 					"render": function ( data, type, full, meta ) {
-						return '<input type="text" name="itemList[' + meta.row + '].itemName" id="itemList[' + meta.row + '].itemName" value="' + data + '" class="form-control input-sm input-itemname"  maxlength="25" />';
+						return '<input type="text" name="itemList[' + meta.row + '].itemName" id="itemList[' + meta.row + '].itemName" maxlength="25" value="' + data + '" class="form-control input-sm input-itemname" />';
 					}
 				},
 				{ "data" : "itemkbn",
 					"orderDataType": "dom-text",
 					"type" : 'string',
 					"render": function ( data, type, full, meta ) {
-						return '<input type="text" name="itemList[' + meta.row + '].itemKbn" id="itemList[' + meta.row + '].itemKbn" value="' + data + '" class="form-control input-sm input-itemkbn"  maxlength="2" />';
+						return '<input type="text" name="itemList[' + meta.row + '].itemKbn" id="itemList[' + meta.row + '].itemKbn" maxlength="2" value="' + data + '" class="form-control input-sm input-itemkbn" />';
 					}
 				},
 				{ "data" : "delflg",
@@ -74,25 +74,48 @@ $(document).ready(function(){
 				this.api().columns().every( function () {
 					var reg = "";
 					var column = this;
-					var select = $('<select class="form-control input-sm" placeholder="フィルター"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-							);
-							var colNun = column[0];
-							// selectタグフィルタ
-							if (colNun == 3) {
-								// 「selected>使用or削除」となっている行取得
-								reg = "selected." + this.value;
-							} else {
+					var colNum = column[0];
+					// 商品区分、状態
+					if (colNum == 2 || colNum == 3) {
+						var select = $('<select class="form-control input-sm" placeholder="フィルター"><option value=""></option></select>')
+							.appendTo( $(column.footer()).empty())
+							.on('change', function () {
+								var val = $.fn.dataTable.util.escapeRegex(
+									$(this).val()
+								);
+								// selectタグフィルタ
+								if (colNum == 3) {
+									// 「selected>使用or削除」となっている行取得
+									reg = "selected." + this.value;
+								} else {
+									// 「value=値」となっている行取得
+									reg = "value=.+" + this.value + "";
+								}
+								// フィルタ実行
+								column
+									.search(reg, true, false)
+									.draw();
+							});
+					// それ以外
+					} else {
+						if (colNum != 4) {
+							var title = $('#itemListTable thead th')
+								.eq(column.index()).text();
+							$('#itemListTable tfoot th')
+								.eq(column.index())
+								.html('<input type="text" class="form-control input-sm itemListTableSearch" placeholder="ﾌｨﾙﾀ '+title+'" />');
+							var that = column;
+							$('input', column.footer()).on( 'keyup change', function() {
 								// 「value=値」となっている行取得
 								reg = "value=.+" + this.value + "";
-							}
-							column
-							.search(reg, true, false )
-							.draw();
-						});
+								// フィルタ実行
+								that
+									.search(reg, true, false)
+									.draw();
+							});
+						}
+					}
+
 					// フィルタ内容作成
 					column.data().unique().sort().each( function ( d, j ) {
 						// 項目切替時カウント
@@ -104,11 +127,7 @@ $(document).ready(function(){
 							// select用selectタグ設定
 							var delFlgText = $('.input-delflg option')[j].text;
 							select.append( '<option value="'+delFlgText+'">'+delFlgText+'</option>' )
-						} else if (zeroCnt == 5) {
-							// input checkboxタグ用select 削除
-							select.remove();
-						} else {
-							// input用selectタグ設定
+						} else if (zeroCnt == 3) {
 							select.append( '<option value="'+d+'">'+d+'</option>' )
 						}
 					} );

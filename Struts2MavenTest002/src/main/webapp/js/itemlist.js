@@ -3,6 +3,8 @@
  */
 $(document).ready(function(){
 	try {
+		// フィルタ用カウンター
+		var zeroCnt = 0;
 		// Datatables設定
 		$("#itemListTable").dataTable({
 			"processing": false,
@@ -15,6 +17,7 @@ $(document).ready(function(){
 				{
 					"data" : "itemcd",
 					"orderDataType": "dom-text",
+					"type" : 'string',
 					"render": function ( data, type, full, meta ) {
 						return '<input type="text" name="itemList[' + meta.row + '].itemCd" id="itemList[' + meta.row + '].itemCd" value="' + data + '" class="form-control input-sm input-itemcd"  maxlength="10" readonly="true" />';
 
@@ -30,12 +33,14 @@ $(document).ready(function(){
 				},
 				{ "data" : "itemkbn",
 					"orderDataType": "dom-text",
+					"type" : 'string',
 					"render": function ( data, type, full, meta ) {
 						return '<input type="text" name="itemList[' + meta.row + '].itemKbn" id="itemList[' + meta.row + '].itemKbn" value="' + data + '" class="form-control input-sm input-itemkbn"  maxlength="2" />';
 					}
 				},
 				{ "data" : "delflg",
 					"orderDataType": "dom-select",
+					"type" : 'string',
 					"render": function ( data, type, full, meta ) {
 						if (data == '0') {
 							return '<select name="itemList[' + meta.row + '].delFlg" id="itemList[' + meta.row + '].delFlg" class="form-control input-sm input-delflg"><option value="0" selected>使用</option><option value="1">削除</option></select>';
@@ -52,21 +57,64 @@ $(document).ready(function(){
 				}
 			],
 			'language': {
-				'lengthMenu': '表示件数 _MENU_ 件',
-				'zeroRecords': '表示データ読込中',
-				'info': '表示中ページ _PAGE_ / _PAGES_ ',
-				'infoEmpty': '読込中',
-				'infoFiltered': '(フィルター中 全レコード _MAX_ 件)',
-				"paginate": {
-					"first": "最初",
-					"last": "最後",
-					"next": "次",
-					"previous": "前"
-				},
+			'lengthMenu': '表示件数 _MENU_ 件',
+			'zeroRecords': '表示データなし',
+			'info': '表示中ページ _PAGE_ / _PAGES_ ',
+			'infoEmpty': '表示ページなし',
+			'infoFiltered': '(フィルター中 全レコード _MAX_ 件)',
+			"paginate": {
+				"first": "最初",
+				"last": "最後",
+				"next": "次",
+				"previous": "前"
+			},
 				"search": "フィルター:",
+			},
+			initComplete: function () {
+				this.api().columns().every( function () {
+					var reg = "";
+					var column = this;
+					var select = $('<select class="form-control input-sm" placeholder="フィルター"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+							);
+							var colNun = column[0];
+							// selectタグフィルタ
+							if (colNun == 3) {
+								// 「selected>使用or削除」となっている行取得
+								reg = "selected." + this.value;
+							} else {
+								// 「value=値」となっている行取得
+								reg = "value=.+" + this.value + "";
+							}
+							column
+							.search(reg, true, false )
+							.draw();
+						});
+					// フィルタ内容作成
+					column.data().unique().sort().each( function ( d, j ) {
+						// 項目切替時カウント
+						if (j == 0) {
+							zeroCnt = zeroCnt+1;
+						}
+						// カウンタ判定
+						if (zeroCnt == 4) {
+							// select用selectタグ設定
+							var delFlgText = $('.input-delflg option')[j].text;
+							select.append( '<option value="'+delFlgText+'">'+delFlgText+'</option>' )
+						} else if (zeroCnt == 5) {
+							// input checkboxタグ用select 削除
+							select.remove();
+						} else {
+							// input用selectタグ設定
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						}
+					} );
+				} );
 			}
 		});
-
 	} catch(e){
 		alert(e);
 	}
@@ -88,8 +136,14 @@ function itemListUpdate(){
 		});
 		// 一つ以上チェックされていた場合
 		if (chkVal.length > 0) {
-			//document.itemListForm[0].remove();
+			// 不要な要素削除
+			var element = document.getElementsByName('itemListTable_length');
+			for (i = element.length - 1; i >= 0; i--) {
+			    element[i].parentNode.removeChild(element[i]);
+			}
+			// アクション設定
 			document.itemListForm.action = "item_confim.action";
+			// サブミット
 			document.itemListForm.submit();
 		} else {
 			alert('チェックボックスにチェックを入れてください');

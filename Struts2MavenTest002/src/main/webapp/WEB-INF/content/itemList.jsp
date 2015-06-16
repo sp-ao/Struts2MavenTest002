@@ -42,7 +42,7 @@
 											<th>商品名</th>
 											<th>商品区分</th>
 											<th>状態</th>
-											<th>対象</th>
+											<th></th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -98,7 +98,7 @@
 								<!--  更新 -->
 								<div class="col-sm-3">
 									<label class="control-label">
-										<span>商品ﾘｽﾄ更新(選択済行)：</span>
+										<span>商品ﾘｽﾄ更新：対象選択後</span>
 									</label>
 									<input
 										type="button"
@@ -111,7 +111,10 @@
 								<!--  作成 -->
 								<div class="col-sm-9">
 									<s:form action="insert_item" method="post" enctype="multipart/form-data">
-										<label class="control-label">商品ﾘｽﾄ新規作成：ﾕｰｻﾞｰﾘｽﾄCSVﾌｧｲﾙを選択してください</label>
+										<label class="control-label">
+											<span>商品ﾘｽﾄ新規作成：ﾕｰｻﾞｰﾘｽﾄCSVﾌｧｲﾙを選択してください</span>
+											<a href="/files/hinagata/item.csv">(雛形CSVﾌｧｲﾙ)</a>
+										</label>
 										<s:file
 											name="fileUploadBean.document"
 											cssClass="file"

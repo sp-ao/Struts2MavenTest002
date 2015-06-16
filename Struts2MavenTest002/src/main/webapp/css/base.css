@@ -146,6 +146,9 @@ div.result dd{
 	font-size: 16px;
 	height: 15px;
 }
+#itemListTable_filter {
+	visibility: hidden;
+}
 
 /* テーブルスクロール関連設定 */
 /* .header-fixed { */

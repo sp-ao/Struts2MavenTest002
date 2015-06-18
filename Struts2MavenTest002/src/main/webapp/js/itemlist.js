@@ -124,10 +124,11 @@ $(document).ready(function(){
 						}
 						// カウンタ判定
 						if (zeroCnt == 4) {
-							// select用selectタグ設定
+							// 対象optionタグ設定
 							var delFlgText = $('.input-delflg option')[j].text;
-							select.append( '<option value="'+delFlgText+'">'+delFlgText+'</option>' )
+							select.append( '<option value="' + delFlgText + '">' + delFlgText + '</option>' )
 						} else if (zeroCnt == 3) {
+							// それ以外
 							select.append( '<option value="'+d+'">'+d+'</option>' )
 						}
 					} );
